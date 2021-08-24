@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">MyTo do List</string>
+        <string name="tarefas">Tarefas</string>
+    <string name="add_button">add button</string>
+    <string name="t_tulo">Título</string>
+    <string name="data">Data</string>
+    <string name="hora">Hora</string>
+    <string name="criar_tarefa">Criar Tarefa</string>
+    <string name="candelar">Cancelar</string>
+    <string name="label_new_task">Criar Tarefa</string>
+    <string name="editar">Editar</string>
+    <string name="apagar">Apagar</string>
+    <string name="ops_voc_n_o_possui_n_nenhuma_tarefa_para_hoje">Ops! Você não possui\n nenhuma tarefa para hoje</string>
+</resources>
