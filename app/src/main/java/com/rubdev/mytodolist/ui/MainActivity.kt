@@ -3,16 +3,22 @@ package com.rubdev.mytodolist.ui
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import com.rubdev.mytodolist.TaskApplication
+import com.rubdev.mytodolist.TaskViewModel
+import com.rubdev.mytodolist.TaskViewModelFactory
 import com.rubdev.mytodolist.databinding.ActivityMainBinding
-import com.rubdev.mytodolist.datasource.TaskDataSource
+import com.rubdev.mytodolist.model.Task
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private val adapter by lazy { TaskListAdapter() }
+    private val taskViewModel: TaskViewModel by viewModels {
+        TaskViewModelFactory((application as TaskApplication).repository)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,8 +26,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.rvTasks.adapter = adapter
-        updateList()
 
+        updateList()
         insertListeners()
     }
 
@@ -37,7 +43,7 @@ class MainActivity : AppCompatActivity() {
 
         }
         adapter.listenerDelete = { task ->
-            TaskDataSource.deleteTask(task)
+            taskViewModel.delete(task)
             updateList()
         }
     }
@@ -45,17 +51,26 @@ class MainActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == CREATE_NEW_TASK && resultCode == Activity.RESULT_OK) {
+            val task = data?.getParcelableExtra<Task>(AddTaskActivity.TASK_ID)
+            if (task != null) {
+                taskViewModel.insert(task)
+            }
             updateList()
+
+
         }
     }
 
     private fun updateList() {
-        val list = TaskDataSource.getList()
-        binding.includeView.emptyState.visibility = if (list.isEmpty())
-            View.VISIBLE
-        else View.GONE
-        adapter.submitList(list)
-
+        taskViewModel.allTasks.observe(this) { tasks ->
+            tasks.let { task ->
+                binding.includeView.emptyState.visibility = if (task.isNullOrEmpty())
+                    View.VISIBLE
+                else
+                    View.GONE
+                adapter.submitList(task)
+            }
+        }
     }
 
     companion object {

@@ -1,14 +1,17 @@
 package com.rubdev.mytodolist.ui
 
 import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
-import android.util.Log
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
+import com.rubdev.mytodolist.TaskApplication
+import com.rubdev.mytodolist.TaskViewModel
+import com.rubdev.mytodolist.TaskViewModelFactory
 import com.rubdev.mytodolist.databinding.ActivityAddTaskBinding
-import com.rubdev.mytodolist.datasource.TaskDataSource
 import com.rubdev.mytodolist.extensions.format
 import com.rubdev.mytodolist.extensions.text
 import com.rubdev.mytodolist.model.Task
@@ -17,21 +20,33 @@ import java.util.*
 class AddTaskActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityAddTaskBinding
+    private val taskViewModel: TaskViewModel by viewModels {
+        TaskViewModelFactory((application as TaskApplication).repository)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityAddTaskBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        displayTaskValuesForEdit()
+        insertListener()
+    }
+
+    private fun displayTaskValuesForEdit(){
         if (intent.hasExtra(TASK_ID)) {
             val taskId = intent.getIntExtra(TASK_ID, 0)
-            TaskDataSource.findById(taskId)?.let {
-                binding.tilTitle.text = it.title
-                binding.tilDate.text = it.date
-                binding.tilHour.text = it.hours
+            taskViewModel.allTasks.observe(this) { tasks ->
+                tasks.forEach {
+                    if (it.id == taskId)
+                        binding.apply {
+                            tilTitle.text = it.title
+                            tilDate.text = it.date
+                            tilHour.text = it.hours
+                        }
+                }
             }
         }
-        insertListener()
     }
 
     private fun insertListener() {
@@ -63,22 +78,38 @@ class AddTaskActivity : AppCompatActivity() {
                 }
             }
             btnNewTask.setOnClickListener {
+                if (intent.hasExtra(TASK_ID)) {
+                    val taskId = intent.getIntExtra(TASK_ID, 0)
+                    taskViewModel.allTasks.observe(this@AddTaskActivity) { tasks ->
+                        tasks.forEach {
+                            if (it.id == taskId) {
+                                val updateTask = Task(
+                                id = taskId,
+                                title = binding.tilTitle.text,
+                                date = binding.tilDate.text,
+                                hours = binding.tilHour.text
+                                )
+                                taskViewModel.delete(it)
+                                taskViewModel.insert(updateTask)
+                            }
+                        }
+                    }
+                }
+                val replyIntent = Intent()
                 val task = Task(
                     id = intent.getIntExtra(TASK_ID, 0),
                     title = binding.tilTitle.text,
                     date = binding.tilDate.text,
                     hours = binding.tilHour.text
                 )
-                TaskDataSource.insertTask(task)
-                setResult(Activity.RESULT_OK)
+                replyIntent.putExtra(TASK_ID, task)
+                setResult(Activity.RESULT_OK, replyIntent)
                 finish()
-                Log.e("TAG", "InsertListner()," + TaskDataSource.getList())
             }
             btnCancel.setOnClickListener {
                 finish()
             }
         }
-
     }
 
     companion object {
