@@ -9,5 +9,8 @@
     <color name="white">#FFFFFFFF</color>
     <color name="card_greem">#f9fbe7</color>
     <color name="rv_background">#c5e1a5</color>
+    <color name="text_splash">#6FA631</color>
+    <color name="init_gradient">#FF5DBB72</color>
+    <color name="finish_gradient">#FF14A0B0</color>
 
 </resources>
