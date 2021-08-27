@@ -9,20 +9,19 @@ import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
 import com.rubdev.mytodolist.TaskApplication
-import com.rubdev.mytodolist.TaskViewModel
-import com.rubdev.mytodolist.TaskViewModelFactory
+import com.rubdev.mytodolist.viewmodel.TaskViewModel
+import com.rubdev.mytodolist.viewmodel.TaskViewModelFactory
 import com.rubdev.mytodolist.databinding.ActivityAddTaskBinding
 import com.rubdev.mytodolist.extensions.format
 import com.rubdev.mytodolist.extensions.text
 import com.rubdev.mytodolist.model.Task
+import org.koin.android.ext.android.inject
 import java.util.*
 
 class AddTaskActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityAddTaskBinding
-    private val taskViewModel: TaskViewModel by viewModels {
-        TaskViewModelFactory((application as TaskApplication).repository)
-    }
+    private val taskViewModel: TaskViewModel by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

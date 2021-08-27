@@ -76,7 +76,7 @@ dependencies {
     implementation("androidx.room:room-ktx:$room_version")
 
     // Current stable version
-    def koin_version = '2.1.5'
+    def koin_version = '2.2.1'
     // Koin for Android
     implementation "org.koin:koin-android:$koin_version"
     // Koin Android Scope feature

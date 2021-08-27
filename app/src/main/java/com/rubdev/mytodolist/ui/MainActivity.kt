@@ -4,21 +4,17 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import com.rubdev.mytodolist.TaskApplication
-import com.rubdev.mytodolist.TaskViewModel
-import com.rubdev.mytodolist.TaskViewModelFactory
 import com.rubdev.mytodolist.databinding.ActivityMainBinding
 import com.rubdev.mytodolist.model.Task
+import com.rubdev.mytodolist.viewmodel.TaskViewModel
+import org.koin.android.ext.android.inject
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private val adapter by lazy { TaskListAdapter() }
-    private val taskViewModel: TaskViewModel by viewModels {
-        TaskViewModelFactory((application as TaskApplication).repository)
-    }
+    private val taskViewModel: TaskViewModel by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
