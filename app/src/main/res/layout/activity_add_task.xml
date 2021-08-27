@@ -2,7 +2,8 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/rv_background">
 
 
     <com.google.android.material.appbar.MaterialToolbar
@@ -34,6 +35,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:hint="@string/t_tulo"
+        android:textColorHint="@color/black"
         app:layout_constraintEnd_toEndOf="@id/guide_end"
         app:layout_constraintStart_toStartOf="@id/guide_start"
         app:layout_constraintTop_toBottomOf="@id/toolbar">
@@ -52,6 +54,7 @@
         android:layout_marginTop="08dp"
         android:layout_marginEnd="16dp"
         android:hint="@string/data"
+        android:textColorHint="@color/black"
         app:layout_constraintEnd_toStartOf="@id/til_hour"
         app:layout_constraintStart_toStartOf="@id/guide_start"
         app:layout_constraintTop_toBottomOf="@id/til_title"
@@ -71,6 +74,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="@string/hora"
+        android:textColorHint="@color/black"
         app:layout_constraintEnd_toEndOf="@id/guide_end"
         app:layout_constraintStart_toEndOf="@id/til_date"
         app:layout_constraintTop_toTopOf="@id/til_date"

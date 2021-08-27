@@ -2,11 +2,18 @@
     <!-- Base application theme. -->
     <style name="Theme.MyToDoList" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/black</item>
-        <item name="colorPrimaryDark">@color/black</item>
+<!--        <item name="colorPrimary">@color/black</item>-->
+<!--        <item name="colorPrimaryDark">@color/black</item>-->
 
-        <item name="colorSecondary">@color/black</item>
-        <item name="colorOnSecondary">@color/white</item>
+<!--        <item name="colorSecondary">@color/black</item>-->
+<!--        <item name="colorOnSecondary">@color/white</item>-->
+
+        <!-- Primary customized brand color. -->
+        <item name="colorPrimary">#558B2F</item>
+        <item name="colorPrimaryDark">#558B2F</item>
+
+        <item name="colorSecondary">#558B2F</item>
+        <item name="colorOnSecondary">@color/black</item>
 
     </style>
 </resources>
