@@ -3,18 +3,15 @@ package com.rubdev.mytodolist.ui
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
-import com.rubdev.mytodolist.TaskApplication
-import com.rubdev.mytodolist.viewmodel.TaskViewModel
-import com.rubdev.mytodolist.viewmodel.TaskViewModelFactory
 import com.rubdev.mytodolist.databinding.ActivityAddTaskBinding
 import com.rubdev.mytodolist.extensions.format
 import com.rubdev.mytodolist.extensions.text
 import com.rubdev.mytodolist.model.Task
+import com.rubdev.mytodolist.viewmodel.TaskViewModel
 import org.koin.android.ext.android.inject
 import java.util.*
 

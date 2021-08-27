@@ -39,20 +39,20 @@ abstract class TaskRoomDatabase : RoomDatabase() {
 
         @Volatile
         private var INSTANCE: TaskRoomDatabase? = null
-        fun getDataBase(
-            context: Context,
-            scope: CoroutineScope
-        ): TaskRoomDatabase {
-            return INSTANCE ?: synchronized(this) {
-                val instance = Room.databaseBuilder(
-                    context.applicationContext,
-                    TaskRoomDatabase::class.java,
-                    "task_database"
-                ).addCallback(TaskDatabaseCallback(scope))
-                    .build()
-                INSTANCE = instance
-                instance
-            }
-        }
+//        fun getDataBase(
+//            context: Context,
+//            scope: CoroutineScope
+//        ): TaskRoomDatabase {
+//            return INSTANCE ?: synchronized(this) {
+//                val instance = Room.databaseBuilder(
+//                    context.applicationContext,
+//                    TaskRoomDatabase::class.java,
+//                    "task_database"
+//                ).addCallback(TaskDatabaseCallback(scope))
+//                    .build()
+//                INSTANCE = instance
+//                instance
+//            }
+//        }
     }
 }

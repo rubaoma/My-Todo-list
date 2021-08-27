@@ -18,17 +18,8 @@ class TaskRepositoryImpl(
     }
 
     @WorkerThread
-    override suspend fun update(task: Task) {
-        tasksDao.updateTask(task)
-    }
-
-    @WorkerThread
     override suspend fun delete(task: Task) {
         tasksDao.delete(task)
     }
 
-    @WorkerThread
-    override suspend fun findTaskById(taskId: Int) {
-        tasksDao.findTaskById(taskId)
-    }
 }

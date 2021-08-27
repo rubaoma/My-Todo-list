@@ -1,11 +1,7 @@
 package com.rubdev.mytodolist
 
 import android.app.Application
-import com.rubdev.mytodolist.datasource.TaskRepositoryImpl
-import com.rubdev.mytodolist.datasource.TaskRoomDatabase
 import com.rubdev.mytodolist.di.getKoinModuleList
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.SupervisorJob
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 
@@ -24,7 +20,7 @@ class TaskApplication : Application() {
         }
     }
 
-    val applicationScope = CoroutineScope(SupervisorJob())
-    val database by lazy { TaskRoomDatabase.getDataBase(this, applicationScope)}
-    val repository by lazy { TaskRepositoryImpl(database.taskDao()) }
+//    val applicationScope = CoroutineScope(SupervisorJob())
+//    val database by lazy { TaskRoomDatabase.getDataBase(this, applicationScope)}
+//    val repository by lazy { TaskRepositoryImpl(database.taskDao()) }
 }
