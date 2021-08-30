@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.rubdev.mytodolist.databinding.ActivityMainBinding
-import com.rubdev.mytodolist.model.Task
 import com.rubdev.mytodolist.viewmodel.TaskViewModel
 import org.koin.android.ext.android.inject
 
@@ -29,7 +28,12 @@ class MainActivity : AppCompatActivity() {
 
     private fun insertListeners() {
         binding.fab.setOnClickListener {
-            startActivityForResult(Intent(this, AddTaskActivity::class.java), CREATE_NEW_TASK)
+            startActivityForResult(
+                Intent(
+                    this,
+                    AddTaskActivity::class.java),
+                CREATE_NEW_TASK
+            )
         }
 
         adapter.listenerEdit = {
@@ -47,13 +51,7 @@ class MainActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == CREATE_NEW_TASK && resultCode == Activity.RESULT_OK) {
-            val task = data?.getParcelableExtra<Task>(AddTaskActivity.TASK_ID)
-            if (task != null) {
-                taskViewModel.insert(task)
-            }
             updateList()
-
-
         }
     }
 

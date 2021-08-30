@@ -29,7 +29,7 @@ class AddTaskActivity : AppCompatActivity() {
         insertListener()
     }
 
-    private fun displayTaskValuesForEdit(){
+    private fun displayTaskValuesForEdit() {
         if (intent.hasExtra(TASK_ID)) {
             val taskId = intent.getIntExtra(TASK_ID, 0)
             taskViewModel.allTasks.observe(this) { tasks ->
@@ -45,62 +45,76 @@ class AddTaskActivity : AppCompatActivity() {
         }
     }
 
+    private fun createDatePiker(){
+        val datePicker = MaterialDatePicker.Builder.datePicker().build()
+        datePicker.apply {
+            addOnPositiveButtonClickListener {
+                val timeZone = TimeZone.getDefault()
+                val offset = timeZone.getOffset(Date().time) * -1
+                binding.tilDate.text = Date(it + offset).format()
+            }
+            show(supportFragmentManager, "DATE_PICKET_TAG")
+        }
+    }
+
+    private fun createTimePicker(){
+        val timePicker = MaterialTimePicker.Builder()
+            .setTimeFormat(TimeFormat.CLOCK_24H)
+            .build()
+        timePicker.apply {
+            addOnPositiveButtonClickListener {
+                val minute =
+                    if (timePicker.minute in 0..9) "0${timePicker.minute}" else timePicker.minute
+                val hour =
+                    if (timePicker.hour in 0..9) "0${timePicker.hour}" else timePicker.hour
+                binding.tilHour.text = "$hour:$minute"
+            }
+            show(supportFragmentManager, "TIME_PICKER_TAG")
+        }
+    }
+
     private fun insertListener() {
         binding.apply {
             tilDate.editText?.setOnClickListener {
-                val datePicker = MaterialDatePicker.Builder.datePicker().build()
-                datePicker.apply {
-                    addOnPositiveButtonClickListener {
-                        val timeZone = TimeZone.getDefault()
-                        val offset = timeZone.getOffset(Date().time) * -1
-                        binding.tilDate.text = Date(it + offset).format()
-                    }
-                    show(supportFragmentManager, "DATE_PICKET_TAG")
-                }
+                createDatePiker()
             }
             tilHour.editText?.setOnClickListener {
-                val timePicker = MaterialTimePicker.Builder()
-                    .setTimeFormat(TimeFormat.CLOCK_24H)
-                    .build()
-                timePicker.apply {
-                    addOnPositiveButtonClickListener {
-                        val minute =
-                            if (timePicker.minute in 0..9) "0${timePicker.minute}" else timePicker.minute
-                        val hour =
-                            if (timePicker.hour in 0..9) "0${timePicker.hour}" else timePicker.hour
-                        binding.tilHour.text = "$hour:$minute"
-                    }
-                    show(supportFragmentManager, "TIME_PICKER_TAG")
-                }
+                createTimePicker()
             }
             btnNewTask.setOnClickListener {
+                val replyIntent = Intent()
+                val taskId = intent.getIntExtra(TASK_ID, 0)
                 if (intent.hasExtra(TASK_ID)) {
-                    val taskId = intent.getIntExtra(TASK_ID, 0)
                     taskViewModel.allTasks.observe(this@AddTaskActivity) { tasks ->
                         tasks.forEach {
                             if (it.id == taskId) {
                                 val updateTask = Task(
-                                id = taskId,
-                                title = binding.tilTitle.text,
-                                date = binding.tilDate.text,
-                                hours = binding.tilHour.text
+                                    id = intent.getIntExtra(TASK_ID, 0),
+                                    title = binding.tilTitle.text,
+                                    date = binding.tilDate.text,
+                                    hours = binding.tilHour.text
                                 )
                                 taskViewModel.delete(it)
                                 taskViewModel.insert(updateTask)
+                                replyIntent.putExtra(TASK_ID, updateTask)
+                                setResult(Activity.RESULT_OK, replyIntent)
+                                finish()
                             }
                         }
                     }
                 }
-                val replyIntent = Intent()
-                val task = Task(
-                    id = intent.getIntExtra(TASK_ID, 0),
-                    title = binding.tilTitle.text,
-                    date = binding.tilDate.text,
-                    hours = binding.tilHour.text
-                )
-                replyIntent.putExtra(TASK_ID, task)
-                setResult(Activity.RESULT_OK, replyIntent)
-                finish()
+                else {
+                    val task = Task(
+                        id = intent.getIntExtra(TASK_ID, 0),
+                        title = binding.tilTitle.text,
+                        date = binding.tilDate.text,
+                        hours = binding.tilHour.text
+                    )
+                    taskViewModel.insert(task)
+                    replyIntent.putExtra(TASK_ID, task)
+                    setResult(Activity.RESULT_OK, replyIntent)
+                    finish()
+                }
             }
             btnCancel.setOnClickListener {
                 finish()
