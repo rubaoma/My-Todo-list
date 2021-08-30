@@ -13,16 +13,16 @@ Projeto app Android Nativo
 
 
 
-<img src="Screenshot_20210830-173617.png" alt="Alt text" style="zoom:50%;" />
+<img src="Screenshot_20210830-173617.png" alt="Alt text" style="zoom:10%;" />
 
-<img src="Screenshot_20210830-173718.png" alt="Alt text" style="zoom:50%;" />
+<img src="Screenshot_20210830-173718.png" alt="Alt text" style="zoom:10%;" />
 
-<img src="Screenshot_20210830-173641.png" alt="Alt text" style="zoom:50%;" />
+<img src="Screenshot_20210830-173641.png" alt="Alt text" style="zoom:10%;" />
 
-<img src="Screenshot_20210830-173648.png" alt="Alt text" style="zoom:50%;" />
+<img src="Screenshot_20210830-173648.png" alt="Alt text" style="zoom:10%;" />
 
-<img src="Screenshot_20210830-173655.png" alt="Alt text" style="zoom:50%;" />
+<img src="Screenshot_20210830-173655.png" alt="Alt text" style="zoom:10%;" />
 
-<img src="Screenshot_20210830-173624.png" alt="Alt text" style="zoom:50%;" />
+<img src="Screenshot_20210830-173624.png" alt="Alt text" style="zoom:10%;" />
 
-<img src="Screenshot_20210830-173631.png" alt="Alt text" style="zoom:50%;" />
+<img src="Screenshot_20210830-173631.png" alt="Alt text" style="zoom:10%;" />
