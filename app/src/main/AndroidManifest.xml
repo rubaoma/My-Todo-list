@@ -12,7 +12,7 @@
         android:theme="@style/Theme.MyToDoList">
         <activity
             android:name=".ui.SplashActivity"
-            android:exported="true">
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -21,7 +21,7 @@
         </activity>
         <activity
             android:name=".ui.MainActivity"
-            android:exported="true">
+            >
 
         </activity>
         <activity android:name=".ui.AddTaskActivity"/>
