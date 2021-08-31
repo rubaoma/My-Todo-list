@@ -6,6 +6,7 @@ Projeto app Android Nativo
 
 * Kotlim
 * RecycleView
+* Kotlin Flow 
 * Room - Persistência de dados local
 * Koin - Injeção de dependência (DI)
 * Arquitetura MVVM 
