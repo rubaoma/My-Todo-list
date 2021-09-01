@@ -1,4 +1,4 @@
-package com.rubdev.mytodolist.datasource.database
+package com.rubdev.mytodolist.datasource.repository
 
 import com.rubdev.mytodolist.model.Task
 

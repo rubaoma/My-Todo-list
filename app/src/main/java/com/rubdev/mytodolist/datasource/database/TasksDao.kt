@@ -1,4 +1,4 @@
-package com.rubdev.mytodolist.datasource
+package com.rubdev.mytodolist.datasource.database
 
 import androidx.room.*
 import com.rubdev.mytodolist.model.Task

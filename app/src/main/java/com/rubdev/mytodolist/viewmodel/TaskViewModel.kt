@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
-import com.rubdev.mytodolist.datasource.TaskRepositoryImpl
+import com.rubdev.mytodolist.datasource.repository.TaskRepositoryImpl
 import com.rubdev.mytodolist.model.Task
 import kotlinx.coroutines.launch
 

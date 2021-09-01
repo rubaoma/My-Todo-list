@@ -1,7 +1,7 @@
-package com.rubdev.mytodolist.datasource
+package com.rubdev.mytodolist.datasource.repository
 
 import androidx.annotation.WorkerThread
-import com.rubdev.mytodolist.datasource.database.TaskRepository
+import com.rubdev.mytodolist.datasource.database.TasksDao
 import com.rubdev.mytodolist.model.Task
 import kotlinx.coroutines.flow.Flow
 

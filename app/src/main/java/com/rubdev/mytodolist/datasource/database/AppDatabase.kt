@@ -2,7 +2,6 @@ package com.rubdev.mytodolist.datasource.database
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import com.rubdev.mytodolist.datasource.TasksDao
 import com.rubdev.mytodolist.model.Task
 import kotlin.reflect.KClass
 
